@@ -1,3 +1,4 @@
+backend/model.pkl
 backend/venv/
 __pycache__/
 *.pyc
