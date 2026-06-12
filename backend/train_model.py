@@ -31,6 +31,9 @@ df["vegitable_Commodity"] = veg_encoder.fit_transform(
     df["vegitable_Commodity"]
 )
 
+joblib.dump(region_encoder, "region_encoder.pkl")
+joblib.dump(veg_encoder, "veg_encoder.pkl")
+
 # Features
 X = df[
     [
