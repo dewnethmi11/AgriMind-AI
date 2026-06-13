@@ -1,6 +1,7 @@
 import { useState } from "react";
 import axios from "axios";
 import "./App.css";
+import PriceChart from "./PriceChart";
 
 function App() {
 
@@ -74,6 +75,19 @@ function App() {
     });
   };
 
+  const resetForm = () => {
+    setFormData({
+      Region: "Colombo",
+      Temperature: "",
+      Rainfall: "",
+      Humidity: "",
+      CropYield: "",
+      Vegetable: "Carrot"
+    });
+
+    setPrice(null);
+  };
+
   const predictPrice = async () => {
 
     if (
@@ -114,11 +128,13 @@ function App() {
 
       <h1>🌱 AgriMind AI</h1>
 
-      <p>
-        AI-Powered Vegetable Price Prediction System
+      <p className="subtitle">
+        AI Powered Vegetable Price Prediction System
       </p>
 
       <div className="card">
+
+        <h2>Prediction Inputs</h2>
 
         <label>Region</label>
         <select
@@ -126,7 +142,7 @@ function App() {
           value={formData.Region}
           onChange={handleChange}
         >
-          {regions.map(region => (
+          {regions.map((region) => (
             <option key={region}>{region}</option>
           ))}
         </select>
@@ -170,22 +186,71 @@ function App() {
           value={formData.Vegetable}
           onChange={handleChange}
         >
-          {vegetables.map(veg => (
+          {vegetables.map((veg) => (
             <option key={veg}>{veg}</option>
           ))}
         </select>
 
-        <button onClick={predictPrice}>
-          {loading ? "Predicting..." : "Predict Price"}
-        </button>
+        <div className="button-group">
 
-        {price !== null && (
-          <div className="result">
-            Predicted Price: Rs. {price}
-          </div>
-        )}
+          <button
+            className="predict-btn"
+            onClick={predictPrice}
+          >
+            {loading ? "Predicting..." : "Predict Price"}
+          </button>
+
+          <button
+            className="reset-btn"
+            onClick={resetForm}
+          >
+            Reset
+          </button>
+
+        </div>
 
       </div>
+
+      <div className="weather-card">
+
+        <h3>🌦 Current Input Summary</h3>
+
+        <p><strong>Region:</strong> {formData.Region}</p>
+        <p><strong>Temperature:</strong> {formData.Temperature || "-"} °C</p>
+        <p><strong>Rainfall:</strong> {formData.Rainfall || "-"} mm</p>
+        <p><strong>Humidity:</strong> {formData.Humidity || "-"} %</p>
+
+      </div>
+
+      {price !== null && (
+
+        <div className="result-card">
+
+          <h2>💰 Prediction Result</h2>
+
+          <h1>
+            Rs. {price}
+          </h1>
+
+          <p>
+            Estimated market price for
+            {" "}
+            <strong>{formData.Vegetable}</strong>
+          </p>
+
+        </div>
+
+      )}
+
+      {price !== null && (
+  <>
+    <div className="result">
+      Predicted Price: Rs. {price}
+    </div>
+
+    <PriceChart predictedPrice={price} />
+  </>
+)}
 
     </div>
   );
