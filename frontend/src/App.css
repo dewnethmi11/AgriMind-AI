@@ -1,60 +1,541 @@
-body{
-  margin:0;
-  background:#f5f7fa;
-  font-family:Arial, sans-serif;
+* {
+  box-sizing: border-box;
 }
 
-.container{
-  max-width:700px;
-  margin:40px auto;
-  text-align:center;
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 50%, #43a047 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  position: relative;
 }
 
-.card{
-  background:white;
-  padding:25px;
-  border-radius:10px;
-  box-shadow:0 0 10px rgba(0,0,0,0.1);
-  text-align:left;
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(76, 175, 80, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(56, 142, 60, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 1;
 }
 
-label{
-  display:block;
-  margin-top:15px;
-  margin-bottom:5px;
-  font-weight:bold;
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+  position: relative;
+  z-index: 2;
+}
+
+h1 {
+  color: white;
+  font-size: 2.5em;
+  margin: 20px 0 5px 0;
+  text-shadow: 3px 3px 6px rgba(0,0,0,0.4), 0 0 20px rgba(76, 175, 80, 0.3);
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.subtitle {
+  color: rgba(255,255,255,0.95);
+  font-size: 1.1em;
+  margin-bottom: 30px;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+}
+
+.section-desc {
+  color: #666;
+  font-size: 0.95em;
+  margin-top: 10px;
+}
+
+.note {
+  color: #ff6b6b;
+  font-size: 0.85em;
+  font-style: italic;
+  margin: 10px 0;
+}
+
+/* ============= TABS ============= */
+.tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 30px;
+  flex-wrap: wrap;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 15px;
+  border-radius: 15px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.15), 0 0 1px rgba(76, 175, 80, 0.5);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.tab-btn {
+  flex: 1;
+  min-width: 150px;
+  padding: 12px 20px;
+  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+  color: #2e7d32;
+  border: 2px solid #c8e6c9;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9em;
+  transition: all 0.3s ease;
+}
+
+.tab-btn:hover {
+  background: linear-gradient(135deg, #c8e6c9 0%, #dcedc8 100%);
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
+}
+
+.tab-btn.active {
+  background: linear-gradient(135deg, #2e7d32 0%, #388e3c 100%);
+  color: white;
+  border-color: #1b5e20;
+  box-shadow: 0 8px 25px rgba(46, 125, 50, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* ============= CARDS ============= */
+.card {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f8e9 100%);
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.15), 0 0 0 1px rgba(76, 175, 80, 0.1);
+  margin-bottom: 25px;
+  text-align: left;
+  border: 1px solid rgba(76, 175, 80, 0.15);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 50px rgba(0,0,0,0.2), 0 0 0 1px rgba(76, 175, 80, 0.2);
+}
+
+.card h2 {
+  color: #1b5e20;
+  margin-top: 0;
+  margin-bottom: 10px;
+  font-weight: 700;
+}
+
+.weather-card {
+  background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+  box-shadow: 0 8px 30px rgba(46, 125, 50, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.weather-card h3,
+.weather-card h4 {
+  margin-top: 0;
+  color: white;
+}
+
+.weather-card p {
+  margin: 8px 0;
+}
+
+.weather-card ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.weather-card li {
+  margin: 5px 0;
+}
+
+/* ============= FORM ELEMENTS ============= */
+label {
+  display: block;
+  margin-top: 15px;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #1b5e20;
+  font-size: 0.95em;
 }
 
 input,
-select{
-  width:100%;
-  padding:10px;
-  border:1px solid #ccc;
-  border-radius:5px;
+select {
+  width: 100%;
+  padding: 12px;
+  border: 2px solid #c8e6c9;
+  border-radius: 10px;
+  font-size: 1em;
+  transition: all 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
 }
 
-button{
-  width:100%;
-  margin-top:20px;
-  padding:12px;
-  background:#28a745;
-  color:white;
-  border:none;
-  border-radius:5px;
-  cursor:pointer;
-  font-size:16px;
+input:focus,
+select:focus {
+  outline: none;
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 3px rgba(46, 125, 50, 0.15), 0 0 12px rgba(46, 125, 50, 0.2);
+  background: white;
 }
 
-button:hover{
-  background:#218838;
+/* ============= BUTTONS ============= */
+.button-group {
+  display: flex;
+  gap: 15px;
+  margin-top: 25px;
+  flex-wrap: wrap;
 }
 
-.result{
-  margin-top:20px;
-  padding:15px;
-  background:#e8f5e9;
-  border-radius:5px;
-  font-size:20px;
-  font-weight:bold;
-  color:#2e7d32;
+button {
+  flex: 1;
+  min-width: 150px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  font-size: 1em;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.predict-btn {
+  background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+  color: white;
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.3);
+}
+
+.predict-btn:hover:not(:disabled) {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(46, 125, 50, 0.5);
+}
+
+.predict-btn:active:not(:disabled) {
+  transform: translateY(-1px);
+}
+
+.reset-btn {
+  background: linear-gradient(135deg, #e8f5e9 0%, #f1f8e9 100%);
+  color: #2e7d32;
+  border: 2px solid #c8e6c9;
+  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.1);
+}
+
+.reset-btn:hover {
+  background: linear-gradient(135deg, #c8e6c9 0%, #dcedc8 100%);
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.2);
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+/* ============= RESULTS ============= */
+.result-card {
+  background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+  color: white;
+  padding: 30px;
+  border-radius: 15px;
+  text-align: center;
+  margin-bottom: 25px;
+  box-shadow: 0 12px 40px rgba(46, 125, 50, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.result-card h1 {
+  font-size: 3em;
+  margin: 10px 0;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+  font-weight: 700;
+}
+
+.result-card h2 {
+  color: white;
+}
+
+.result-card p {
+  font-size: 1.1em;
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+.results-container {
+  animation: slideIn 0.3s ease;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============= RECOMMENDATIONS ============= */
+.recommendation-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f8e9 100%);
+  border-left: 5px solid #2e7d32;
+  padding: 20px;
+  margin-bottom: 15px;
+  border-radius: 10px;
+  box-shadow: 0 4px 15px rgba(46, 125, 50, 0.15);
+  border-top: 1px solid rgba(76, 175, 80, 0.2);
+  border-bottom: 1px solid rgba(76, 175, 80, 0.2);
+}
+
+.recommendation-card.compact {
+  margin-bottom: 10px;
+  padding: 15px;
+}
+
+.rec-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.rec-header h3 {
+  margin: 0;
+  color: #1b5e20;
+  font-weight: 700;
+}
+
+.profitability-score {
+  background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+  color: white;
+  padding: 5px 15px;
+  border-radius: 20px;
+  font-weight: 600;
+  font-size: 0.9em;
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+}
+
+.rec-details p {
+  margin: 8px 0;
+  color: #333;
+  font-weight: 500;
+}
+
+/* ============= ADVICE CARDS ============= */
+.advice-card {
+  background: #f8f9fa;
+  border-left: 5px solid #4CAF50;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 8px;
+}
+
+.advice-card h3 {
+  color: #333;
+  margin-top: 0;
+}
+
+.summary-text {
+  color: #555;
+  line-height: 1.6;
+  font-size: 1em;
+}
+
+.risk-item {
+  background: white;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 6px;
+  border-left: 4px solid #ff6b6b;
+}
+
+.risk-item p {
+  margin: 5px 0;
+  color: #555;
+}
+
+/* ============= DECISION CARDS ============= */
+.decision-card {
+  background: linear-gradient(135deg, #ffffff 0%, #f1f8e9 100%);
+  border: 2px solid #c8e6c9;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(46, 125, 50, 0.12);
+}
+
+.decision-card h3 {
+  color: #1b5e20;
+  margin-top: 0;
+  font-weight: 700;
+}
+
+.scenario-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-bottom: 25px;
+}
+
+.scenario {
+  padding: 20px;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+}
+
+.scenario:hover {
+  transform: translateY(-5px);
+}
+
+.scenario h3 {
+  margin-top: 0;
+  color: white;
+  font-weight: 700;
+}
+
+.scenario p {
+  margin: 8px 0;
+  font-size: 0.95em;
+  font-weight: 500;
+}
+
+.optimistic {
+  background: linear-gradient(135deg, #2e7d32 0%, #43a047 100%);
+}
+
+.realistic {
+  background: linear-gradient(135deg, #1976d2 0%, #1565c0 100%);
+}
+
+.pessimistic {
+  background: linear-gradient(135deg, #d32f2f 0%, #c62828 100%);
+}
+
+.contingency-item {
+  background: #fff3cd;
+  border-left: 4px solid #ffc107;
+  padding: 15px;
+  margin: 15px 0;
+  border-radius: 6px;
+}
+
+.contingency-item p {
+  margin: 5px 0;
+  color: #333;
+}
+
+.contingency-item ul {
+  margin: 10px 0;
+  padding-left: 20px;
+}
+
+.contingency-item li {
+  color: #555;
+  margin: 5px 0;
+}
+
+/* ============= TABLES ============= */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+table th {
+  background: #667eea;
+  color: white;
+  padding: 12px;
+  text-align: left;
+  font-weight: 600;
+}
+
+table td {
+  padding: 12px;
+  border-bottom: 1px solid #e0e0e0;
+  text-align: left;
+}
+
+table tr:hover {
+  background: #f5f5f5;
+}
+
+/* ============= HISTORY ============= */
+.history {
+  background: white;
+  padding: 25px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+  margin-top: 25px;
+}
+
+.history h2 {
+  color: #333;
+  margin-top: 0;
+}
+
+.history table {
+  margin-top: 20px;
+}
+
+/* ============= COMPREHENSIVE SUMMARY ============= */
+.comprehensive-summary {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  text-align: center;
+}
+
+.comprehensive-summary h2 {
+  color: #333;
+  margin: 0 0 10px 0;
+}
+
+/* ============= RESPONSIVE ============= */
+@media (max-width: 768px) {
+  .container {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  h1 {
+    font-size: 2em;
+  }
+
+  .tabs {
+    flex-direction: column;
+  }
+
+  .tab-btn {
+    min-width: 100%;
+  }
+
+  .button-group {
+    flex-direction: column;
+  }
+
+  button {
+    min-width: 100%;
+  }
+
+  .scenario-container {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 20px;
+  }
 }
