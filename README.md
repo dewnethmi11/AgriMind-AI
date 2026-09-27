@@ -546,4 +546,4 @@ Upcoming:
 * AI advisor integration
 
 ---
-
+#Started working with real data again.For this project future develpoment
